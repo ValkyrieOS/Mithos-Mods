@@ -34,11 +34,14 @@
     <div class="min-h-full flex flex-col">
       <header class="bg-gray-800 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1
-            class="text-3xl sm:text-4xl font-bold tracking-tight text-white text-center"
-          >
-            Panel de Moderadores - MithosMC
-          </h1>
+          <div class="flex justify-between items-center">
+            <h1
+              class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white"
+            >
+              Panel de Moderadores - MithosMC
+            </h1>
+            <span class="text-sm text-gray-400">v1.0</span>
+          </div>
         </div>
       </header>
       <main class="flex-grow">
@@ -61,6 +64,29 @@
     </div>
 
     <script>
+      const moderatorsData = [
+        {
+          id: "1",
+          name: "Glazzier",
+          warnings: 0,
+          severeWarnings: 1,
+          sanctionDate: "2024-12-11",
+          rank: "Head Manager",
+          avatar:
+            "https://cdn.discordapp.com/avatars/631907198930386950/8f3f1fc85eee5ed5f3067c90ac41adef.webp?size=4096",
+        },
+        {
+          id: "2",
+          name: "Rojas",
+          warnings: 1,
+          severeWarnings: 0,
+          sanctionDate: "2024-12-6",
+          rank: "Coordinador",
+          avatar:
+            "https://cdn.discordapp.com/avatars/1192222099603992598/c3a96abc6625acd559cf291320abb065.webp?size=1024&width=640&height=640",
+        },
+      ];
+
       function calculateExpirationDate(sanctionDate, warnings, severeWarnings) {
         const date = new Date(sanctionDate);
         const months = warnings + severeWarnings * 3;
@@ -205,16 +231,7 @@
         });
       }
 
-      fetch("/data/sanciones.json")
-        .then((response) => response.json())
-        .then((data) => {
-          renderModeratorCards(data);
-        })
-        .catch((error) => {
-          console.error("Error al cargar los datos:", error);
-          document.getElementById("moderatorsGrid").innerHTML =
-            '<p class="text-red-500 text-center text-xl">Error al cargar los datos de los moderadores.</p>';
-        });
+      renderModeratorCards(moderatorsData);
     </script>
   </body>
 </html>
